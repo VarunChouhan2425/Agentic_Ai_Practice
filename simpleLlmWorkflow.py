@@ -18,10 +18,7 @@ class llmState(BaseModel):
     question : str
     answer : str | None = None
 
-class LLMAnswer(BaseModel):
-    answer: str
-
-parser = PydanticOutputParser(pydantic_object=LLMAnswer)
+parser = PydanticOutputParser(pydantic_object=llmState)
 
 # creating node
 def llmQa (state: llmState) -> llmState:
@@ -55,7 +52,7 @@ graph.add_edge('llm_qa', END)
 
 workFlow = graph.compile()
 
-initial_state = {"question": "Which language does Vikings spoke?"}
+initial_state = {"question": "was the ai first used in world war?"}
 final_state = workFlow.invoke(initial_state)
 
 print(final_state)
