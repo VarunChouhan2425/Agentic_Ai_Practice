@@ -21,7 +21,7 @@ class llmState(BaseModel):
 parser = PydanticOutputParser(pydantic_object=llmState)
 
 # creating node
-def llmQa (state: llmState) -> llmState:
+def llmQaNode (state: llmState) -> llmState:
 
     question = state.question
 
@@ -44,7 +44,7 @@ def llmQa (state: llmState) -> llmState:
 graph = StateGraph(llmState)
 
 # add node
-graph.add_node('llm_qa', llmQa)
+graph.add_node('llm_qa', llmQaNode)
 
 # add edges
 graph.add_edge(START, 'llm_qa')
